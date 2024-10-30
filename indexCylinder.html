@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cylinder Volume Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            margin: 0;
+            padding: 0;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+        }
+
+        .container {
+            max-width: 450px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+            text-align: center; 
+        }
+
+        h1 {
+            color: #343a40; 
+            margin-bottom: 20px; 
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #495057; 
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da; 
+            border-radius: 4px;
+            font-size: 16px; 
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF; 
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px; 
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3; 
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #495057; 
+        }
+
+        .button2 {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 55px;
+            margin-bottom: 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 12px;
+            width: 78%;
+        }
+        .button2:hover {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cylinder Volume Calculator</h1>
+        <p>คำนวณโดยใช้สูตร 3.14× r × 2 × h 
+            <br>เมื่อ r คือ รัศมีของฐานรูปวงกลมและ h คือ ความสูงของทรงกระบอก
+        </p>
+        <form id="volume-form">
+            <label for="radius">รัศมีของทรงกระบอก (r):</label>
+            <input type="number" id="radius" placeholder="โปรดใส่รัศมีของฐานรูปวงกลม" required>
+
+            <label for="height">ความสูงของทรงกระบอก (h):</label>
+            <input type="number" id="height" placeholder="โปรดใส่ความสูงของทรงกระบอก" required>
+
+            <button type="submit">Calculate Volume</button>
+        </form>
+        <div id="result"></div>
+        <div>
+            <a href="index.html" class="button2">Home</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById('volume-form').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const radius = parseFloat(document.getElementById('radius').value);
+            const height = parseFloat(document.getElementById('height').value);
+            
+            const volume = Math.PI * Math.pow(radius, 2) * height;
+           
+            document.getElementById('result').innerText = `ปริมาตรของทรงกระบอก = ${volume.toFixed(2)} ลูกบาศก์หน่วย`;
+        });
+    </script>
+</body>
+</html>

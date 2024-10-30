@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Exchange</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .exchange-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .currency-input, .currency-output {
+            display: flex;
+            flex-direction: column;
+        }
+
+        select, input[type="number"], input[type="text"] {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .button2 {
+            background-color: #4CAF50;
+            border: none; 
+            color: white; 
+            padding: 15px 25px; 
+            text-align: center; 
+            text-decoration: none; 
+            display: inline-block; 
+            font-size: 16px; 
+            margin-top: 15px ;
+            margin-bottom: 2px;
+            transition-duration: 0.4s;
+            cursor: pointer; 
+            border-radius: 12px; 
+            width: 78%;
+        }
+        
+        .button2:hover {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Currency Exchange</h1>
+        <div class="exchange-form">
+            <div class="currency-input">
+                <label for="fromCurrency">เปลี่ยนจาก:</label>
+                <select id="fromCurrency">
+                    <option value="USD">USD - US Dollar</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - British Pound</option>
+                    <option value="JPY">JPY - Japanese Yen</option>
+                    <option value="AUD">AUD - Australian Dollar</option>
+                    <option value="CAD">CAD - Canadian Dollar</option>
+                    <option value="CHF">CHF - Swiss Franc</option>
+                    <option value="CNY">CNY - Chinese Yuan</option>
+                    <option value="SEK">SEK - Swedish Krona</option>
+                    <option value="NZD">NZD - New Zealand Dollar</option>
+                    <option value="THB">THB - Thai Baht</option>
+                </select>
+                <input type="number" id="fromAmount" placeholder="Amount" />
+            </div>
+            <div class="currency-output">
+                <label for="toCurrency">ไปเป็น:</label>
+                <select id="toCurrency">
+                    <option value="USD">USD - US Dollar</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - British Pound</option>
+                    <option value="JPY">JPY - Japanese Yen</option>
+                    <option value="AUD">AUD - Australian Dollar</option>
+                    <option value="CAD">CAD - Canadian Dollar</option>
+                    <option value="CHF">CHF - Swiss Franc</option>
+                    <option value="CNY">CNY - Chinese Yuan</option>
+                    <option value="SEK">SEK - Swedish Krona</option>
+                    <option value="NZD">NZD - New Zealand Dollar</option>
+                    <option value="THB">THB - Thai Baht</option>
+                </select>
+                <input type="text" id="toAmount" placeholder="Converted Amount" readonly />
+            </div>
+            <button id="convertBtn">แปลง</button>
+        </div>
+        <div>
+            <a href="index.html" class="button2">Home</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById("convertBtn").addEventListener("click", convertCurrency);
+
+        async function convertCurrency() {
+            const fromCurrency = document.getElementById("fromCurrency").value;
+            const toCurrency = document.getElementById("toCurrency").value;
+            const fromAmount = document.getElementById("fromAmount").value;
+
+            if (fromAmount === "" || fromAmount <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+
+            try {
+                const apiUrl = `https://api.exchangerate-api.com/v4/latest/${fromCurrency}`;
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const exchangeRate = data.rates[toCurrency];
+                const toAmount = (fromAmount * exchangeRate).toFixed(2);
+
+                document.getElementById("toAmount").value = toAmount;
+            } catch (error) {
+                alert("An error occurred while fetching exchange rates.");
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>

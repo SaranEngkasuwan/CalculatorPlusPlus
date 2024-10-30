@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เครื่องคิดเลข</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 260px;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 35px;
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(90deg, #FFA500, #FFD700);
+            background-clip: text;
+            color: transparent;
+            margin: 0;
+            padding: 10px;
+        }
+
+        #result {
+            width: 90%; 
+            height: 40px; 
+            margin-bottom: 10px; 
+            font-size: 1.5rem; 
+            text-align: right; 
+            padding-right: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 10px; 
+        }
+
+        button {
+            height: 50px; 
+            font-size: 1.2rem; 
+            border: none;
+            border-radius: 5px; 
+            background-color: #e0e0e0; 
+            cursor: pointer; 
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #d0d0d0; 
+        }
+
+        .equal {
+            grid-column: span 1; 
+            background-color: #007bff; 
+            color: white; 
+        }
+
+        .equal:hover {
+            background-color: #0056b3; 
+        }
+
+        .button2 {
+            background-color: #4CAF50; 
+            border: none; 
+            color: white; 
+            padding: 15px 32px; 
+            text-align: center; 
+            text-decoration: none; 
+            display: inline-block; 
+            font-size: 16px;
+            margin-top: 20px ; 
+            margin-bottom: 2px;
+            transition-duration: 0.4s; 
+            cursor: pointer; 
+            border-radius: 12px; 
+            width: 75%; 
+        }
+        
+        .button2:hover {
+            background-color: white; 
+            color: black; 
+            border: 2px solid #4CAF50; 
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>calculator</h2>
+        <input type="text" id="result" disabled>
+        <div class="buttons">
+            <button onclick="clearScreen()">C</button>
+            <button onclick="deleteLast()">DEL</button>
+            <button onclick="appendToResult('(')">(</button>
+            <button onclick="appendToResult(')')">)</button>
+            <button onclick="appendToResult('7')">7</button>
+            <button onclick="appendToResult('8')">8</button>
+            <button onclick="appendToResult('9')">9</button>
+            <button onclick="appendToResult('/')">/</button>
+            <button onclick="appendToResult('4')">4</button>
+            <button onclick="appendToResult('5')">5</button>
+            <button onclick="appendToResult('6')">6</button>
+            <button onclick="appendToResult('*')">*</button>
+            <button onclick="appendToResult('1')">1</button>
+            <button onclick="appendToResult('2')">2</button>
+            <button onclick="appendToResult('3')">3</button>
+            <button onclick="appendToResult('-')">-</button>
+            <button onclick="calculateResult()" class="equal">=</button>
+            <button onclick="appendToResult('0')">0</button>
+            <button onclick="appendToResult('.')">.</button>
+            <button onclick="appendToResult('+')">+</button>
+        </div>
+
+        <div>
+            <a href="index.html" class="button2">Home</a>
+        </div>
+    </div>
+    <script>
+        function clearScreen() {
+            document.getElementById("result").value = "";
+        }
+        function deleteLast() {
+            let current = document.getElementById("result").value;
+            document.getElementById("result").value = current.slice(0, -1); 
+        }
+
+        function appendToResult(value) {
+            document.getElementById("result").value += value; 
+        }
+
+        function calculateResult() {
+            try {
+                let result = eval(document.getElementById("result").value);
+                document.getElementById("result").value = result; 
+            } catch (e) {
+                document.getElementById("result").value = "Error"; 
+            }
+        }
+    </script>
+</body>
+</html>

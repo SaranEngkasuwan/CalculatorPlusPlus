@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content = "width=device-width,initial-scale=1.0">
+    <title>Calculator++</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Segoe UI', 'Kanit', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        body{
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        }
+        
+        /* Scroll Bar */
+        ::-webkit-scrollbar{
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        }
+
+        ::-webkit-scrollbar-thumb
+        {
+            background: #fff;
+            border-radius: 6px;
+        }
+       
+        header{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 7px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.5s;
+            z-index: 1000;
+        }
+        
+        header.sticky{
+            background: linear-gradient(to bottom, #74ebd5, #acb6e5);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        header .logo{
+            position: relative;
+            color: #fff;
+            text-decoration: none;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        header .nav{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        header ul li{
+            list-style: none;
+            margin: 10px;
+        }
+        
+        header ul li a{
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        
+        header ul li a:hover{
+            background: #b5bfec;
+            color: linear-gradient(135deg, #74ebd5, #acb6e5);
+            box-shadow: 0 0 0 10px #b5bfec;
+        }
+
+        header .action .searchBx {
+            padding: 5px;
+            margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            border-radius: 5px;
+        }
+
+        header .action .searchBx i{
+            font-size: 1.4em;
+            margin: 5px;
+            color: #222;
+        }
+
+        header .action .searchBx input{
+            outline: none;
+            border: none;
+            font-size: 1em;
+            color: #222;
+        }
+
+        /*Home banner*/
+        .banner{
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            padding: 0px 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner .bg{
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner .bg .content{
+            width: 50%;
+            height: 100%;
+        }
+
+        .banner .bg .content h2{
+            font-size: 4em;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .banner .bg .content p{
+            font-size: 1em;
+            color: #f1f2f7;
+            letter-spacing: 1px;
+        }
+
+        .banner .bg .content a{
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border: 1px solid #acb6e5;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .banner .bg .content a:hover{
+            background: #acb6e5;
+            border: none;
+            color: linear-gradient(135deg, #74ebd5, #acb6e5);
+            box-shadow: 0 0 0 10px #acb6e5;
+        }
+
+        .banner .bg .img{
+            width: 600px;
+        }
+
+          /*About us*/
+        .about{
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            padding: 0px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+         
+        .about .contentBx{
+            width: 50%;
+            margin: 20px;
+        }
+
+        .about .contentBx h2{
+            font-size: 3em;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .about .contentBx p{
+            max-width: 600px;
+            text-align: justify;
+            color: #f1f2f7;
+        }
+
+        .about .contentBx a{
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border: 1px solid #acb6e5;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .about .contentBx a:hover{
+            background: #acb6e5;
+            border: none;
+            color: #fff;
+            box-shadow: 0 0 0 10px #acb6e5;
+        }
+
+         /*Games*/
+        .games{
+            padding: 0px 100px;
+            width: 100%;
+            min-height: 130vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 40px auto;
+        }
+
+        .games h1{
+            color: #fff;
+            margin: 10px 0;
+        }
+
+        .games ul{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .games ul li{
+            list-style: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 5px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .games ul li.active{
+            background: #1aeeef;
+            color: #050e2d;
+            box-shadow: 0 0 10px #74ebd5;
+        }
+
+        .games .cardBx{
+            width: 100%;
+            min-height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .games .cardBx .card{
+            width: 280px;
+            border-radius: 10px;
+            margin: 20px 40px;
+            background: #1b2141;
+            box-shadow: 0 0 10px #74ebd5;
+        }
+
+        .games .cardBx .card img{
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .games .cardBx .card .content{
+            padding: 10px;
+        }
+
+        .games .cardBx .card .content h4{
+            color: #fff;
+            margin: 15px 0;
+        }
+
+        .games .cardBx .card .progress-line{
+            position: relative;
+            height: 100%;
+            width: 100%;
+            background: #35407e;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: animate 1s cubic-bezier(1,0,0.5,1) forwards;
+        }
+
+        .games .cardBx .card .progress-line span{
+            position: absolute;
+            height: 100%;
+            width: 80%;
+            border-radius: 10px;
+            background: #1aeeef;
+            box-shadow: 0 0 10px #1aeeef;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: animate 1s cubic-bezier(1,0,0.5,1) forwards;
+        }
+
+        @keyframes animate{
+            100%{
+                transform: scaleX(1);
+            }
+
+        }
+        .games .cardBx .card .info{
+            border-top: 2px solid #35407e;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .games .cardBx .card .info p{
+            font-size: 1em;
+            color: #00000000;
+        }
+
+        .games .cardBx .card .info p span{
+            color: #00000000;
+        }
+
+        .games .cardBx .card .info a{
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border: 1px solid #1aeeef;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .games .cardBx .card .info a:hover{
+            background: #74ebd5;
+            border: none;
+            color: #050e2d;
+            box-shadow: 0 0 0 10px #74ebd5;
+        }
+
+        .games .cardBx .card.hide{
+            display: none;
+        }
+
+        /*Contact*/
+        .contact{
+            padding: 160px 100px;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact img{
+            height: 100%;
+            width: 50%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .contact .form{
+            width: 50%;
+            margin: 30px;
+        }
+
+        .contact .form h1{
+            color: #fff;
+        }
+
+        .contact .form .inputBx{
+            margin: 10px 0;
+        }
+
+        .contact .form .inputBx p{
+            color: #fff;
+        }
+
+        .contact .form .inputBx input,
+        .contact .form .inputBx textarea{
+            border: none;
+            outline: none;
+            padding: 10px;
+            width: 100%;
+            color: #222;
+            background: #d6f5ef;
+            min-height: 15px;
+            font-size: 1.1em;
+        }
+
+        .contact .form .inputBx textarea{
+            height: 150px;
+        }
+
+        .contact .form .inputBx input[type="submit"]{
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 15px 0;
+            outline: none;
+            background: transparent;
+            border: 1px solid #74ebd5;
+            text-decoration: none;
+            font-weight: 700;
+            width: 150px;
+            border-radius: 5px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .contact .form .inputBx input[type="submit"]:hover{
+            background: #74ebd5;
+            border: none;
+            color: #fff;
+            box-shadow: 0 0 10px #74ebd5;
+        }
+
+        /*Footer*/
+        footer{
+            padding: 50px 100px;
+            background: #2d5a53;
+        }
+
+        footer .info{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        footer .info .logo{
+            position: relative;
+            color: #fff;
+            text-decoration: none;
+            font-size: 2em;
+            font-weight: 700;
+        }
+        
+        footer .info p{
+            color: #dbd9d9;
+        }
+        
+        footer .info ul{
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        footer .info ul li{
+            list-style: none;
+            height: 50px;
+            width: 50px;
+            margin: 5px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #acb6e5;
+        }
+        
+        footer .info ul li:hover{
+            background: #1aeeef;
+            border: none;
+            box-shadow: 0 0 10px #1aeeef;
+        }
+        
+        footer .info ul li a i{
+            font-size: 1.5em;
+            color: #fff;
+        }
+        
+        footer .info ul li:hover a i{
+            color: #050e2d;
+        }
+        
+        .animeX{
+            position: relative;
+            transform: translateY(150px);
+            opacity: 0;
+            transition: all 2s ease;
+        }
+        
+        .animeX.active{
+            transform: translateY(150px);
+            opacity: 1;
+        }
+
+        /*Responsive Design*/
+        @media (max-width: 991px)
+        {
+            header
+            {
+                padding: 15px 40px;
+            }
+            
+            header .nav{
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: #1b2141;
+                display: none;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                z-index: 1000;
+            }
+
+            header .nav.active{
+                display: flex;
+            }
+            
+            header .nav li{
+                margin: 20px 0;
+            }
+            
+            header .nav li a{
+                font-size: 24px;
+                margin: 10px 0;
+            }
+            
+            .toggleMenu{
+                position: relative;
+                width: 30px;
+                height: 30px;
+                background: url(img/menu-regular-24.png);
+                background-size: 30px;
+                background-repeat: no-repeat;
+                cursor: pointer;
+                z-index: 1001;
+            }
+    
+            .toggleMenu.active{
+                background: url(img/x-circle-solid-24.png);
+                background-size: 30px;
+                background-repeat: no-repeat;
+            }
+
+            .banner .bg img{
+                position: absolute;
+            }
+            
+            .banner .bg content{
+                width: 100%;
+                height: 100%;
+                background: rgb(27 33 65 / 50%);
+                padding: 20px;
+                z-index: 1;
+                border-radius: 10px;
+            }        
+            
+            .about{
+                flex-direction: column;
+            }
+            
+            .about .contentBx {
+                width: 100%;
+            }
+            
+            .contact{
+               flex-direction: column;
+            }
+            
+            .contact img{
+                height: 100%;
+                width: 100%;
+            }
+            
+            .contact .form{
+                width: 100%;
+                margin: 30px;
+                padding: 10px;
+            }
+            
+            .contact .form h1{
+                text-align: center;
+            }
+            
+            footer .info{
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Calculator++</a>
+        <ul class="nav">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#games">Calculator</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="action">
+            <div class ="searchBx">
+                <a href="#"><i class='bx bx-search'></i></a>
+                <input type="text" placeholder="Search">
+            </div>
+        </div>
+        <div class ="toggleMenu" onclick="toggleMenu();"></div>
+    </header>
+
+     <!--Home Banner-->
+     <div class="banner animeX" id="home">
+        <div class="bg">
+        <div class="content">
+          <h2>Welcome to the <br> 
+            Calculator++ website!</h2>
+            <p>รวมเครื่องคำนวณเพื่อความสะดวกสบาย!!</p>
+            <a href="#games" class="bth">Use Now</a>
+        </div>
+         <img src="img/ลูกเต๋าโครตเท่.png">
+      </div>
+    </div>
+
+    <!--About-->
+    <div class="about animeX" id="about">
+         <div class="contentBx">
+            <h2>About Me</h2>
+            <p> 
+                <br>เป็นเว็ปไซต์ที่นายสรัล อิงคสุวรรณศิริ 
+                <br>พัฒนาขึ้นเพื่อตอบสนองความต้องการของคน
+                <br>ที่ต้องการเครื่องมือที่สามารถคำนวณได้อย่างรวดเร็วและแม่นยำ 
+                <br>โดยเฉพาะอย่างยิ่งเครื่องมือที่สามารถเข้าถึงได้ทุกที่ ทุกเวลา บนคอมพิวเตอร์หรือสมาร์ทโฟน 
+            </p>
+            <a href="#games">Use Now</a>
+         </div>
+         <img src="img/สรัลสุดหล่อ.png">
+    </div>
+    
+    <!--Games-->
+    <div class="games animeX" id="games">
+       <h1>Calculator</h1>
+       <ul>
+        <li class="list active" data-filter="all">All</li>
+        <li class="list" data-filter="pc">Health</li>
+        <li class="list" data-filter="mobile">Volume</li>
+        
+    </ul>
+      <div class="cardBx">
+        <div class="card" data-item="no">
+            <img src="img/calculator.png">
+            <div class="content">
+                 <h4>Calculator</h4>               
+                 <div class="info">
+                      <p><br><span></span></p>
+                      <a href="indexCalculator.html">Use Now</a>
+                 </div>
+             </div>
+        </div>
+
+        <div class="card" data-item="pc">
+          <img src="img/BMIimg.png">
+          <div class="content">
+               <h4>BMI Calculator</h4>               
+               <div class="info">
+                    <p><br><span></span></p>
+                    <a href="indexBMI.html">Use Now</a>
+               </div>
+           </div>
+        </div>
+
+        <div class="card" data-item="pc">
+            <img src="img/BMRimg.png">
+            <div class="content">
+                 <h4>BMR Calculator</h4>
+                 <div class="info">
+                      <p><br><span></span></p>
+                      <a href="indexBMR.html">Use Now</a>
+                 </div>
+             </div>
+        </div>
+           
+        <div class="card" data-item="no">
+            <img src="img/change.png">
+            <div class="content">
+                 <h4>Change the units</h4>
+                 <div class="info">
+                      <p><br><span></span></p>
+                      <a href="indexChangeunit.html">Use Now</a>
+                 </div>
+             </div>
+        </div>
+
+        <div class="card" data-item="no">
+            <img src="img/Currency.png">
+            <div class="content">
+                 <h4>Currency</h4>
+                 <div class="info">
+                      <p><br><span></span></p>
+                      <a href="indexCurrency.html">Use Now</a>
+                 </div>
+             </div>
+        </div>
+
+        <div class="card" data-item="mobile">
+            <img src="img/ปริมาตรทรงกลม.png">
+            <div class="content">
+                 <h4>Sphere Volume Calculator</h4>
+                 <div class="info">
+                      <p><br><span></span></p>
+                      <a href="indexSphere.html">Use Now</a>
+                 </div>
+             </div>
+        </div>
+
+        <div class="card" data-item="mobile">
+            <img src="img/ปริมาตรทรงกระบอก.png">
+            <div class="content">
+                 <h4>Cylinder Volume Calculator</h4>
+                 <div class="info">
+                      <p><br><span></span></p>
+                      <a href="indexCylinder.html">Use Now</a>
+                 </div>
+             </div>
+        </div>
+
+        <div class="card" data-item="mobile">
+            <img src="img/ปริมาตรพีระมิด.png">
+            <div class="content">
+                 <h4>Pyramid Volume Calculator</h4>
+                 <div class="info">
+                      <p><br><span></span></p>
+                      <a href="indexPyramid.html">Use Now</a>
+                 </div>
+             </div>
+        </div>
+       </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact animeX" id="contact" >
+        <img src="img/ตัวเลข.png">
+        <div class="form">
+            <h1>Contact Me</h1>
+            <div class="inputBx">
+                <p>Enter Name</p>
+                <input type="text" placeholder="Full Name">
+            </div>
+            <div class="inputBx">
+                <p>Enter Email</p>
+                <input type="text" placeholder="Email">
+            </div>
+            <div class="inputBx">
+                <p>Message</p>
+                <textarea placeholder="Type here..."></textarea>
+            </div>
+            <div class="inputBx">
+                <input type="submit" name="Submit">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="info">
+             <a href="#" class="logo">CALCULATOR++</a>
+             <p><i class='bx bx-copyright'></i>2024 All Rigth Reserved</p>
+             <ul>
+                <li><a href="https://www.facebook.com/"><i class='bx bxl-facebook' ></i></a></li>
+                <li><a href="#"><i class='bx bxl-instagram' ></i></a></li>
+                <li><a href="#"><i class='bx bxs-envelope' ></i></i></a></li>
+             </ul>
+        </div>
+    </footer>
+    
+    
+    
+    <script>
+        /*Sticky NavBar*/
+        window.addEventListener('scroll',function(){
+            var header = document.querySelector('header');
+            header.classList.toggle('sticky',window.scrollY > 0);
+        }); 
+        
+        /*Responsive NavBar*/
+            function toggleMenu(){
+            const toggleMenu = document.querySelector('.toggleMenu');
+            const nav = document.querySelector('.nav');
+            toggleMenu.classList.toggle('active')
+            nav.classList.toggle('active')
+        }
+
+        /* Scrolling Ani Eff*/
+        window.addEventListener('scroll',function(){
+            var anime = document.querySelectorAll('.animeX');
+
+            for(var s = 0; s < anime.length; s++){
+                var windowheight = window.innerHeight;
+                var animetop = anime[s].getBoundingClientRect().top;
+                var animepoint = 150;
+
+                if(animetop < windowheight - animepoint){
+                    anime[s].classList.add('active');
+                }
+                else{
+                    anime[s].classList.remove('active');
+                }
+            }
+        })
+
+        let list = document.querySelectorAll('.list');
+        let card = document.querySelectorAll('.card');
+
+        for(let i = 0;i < list.length; i++){
+            list[i].addEventListener('click',function(){
+                for (let j = 0; j < list.length ; j++){
+                    list[j].classList.remove('active');
+                }
+                this.classList.add('active');
+
+                let dataFilter = this.getAttribute('data-filter');
+
+                for(let k = 0 ; k < card.length ; k++)
+                {
+                    card[k].classList.remove('active');
+                    card[k].classList.add('hide');
+
+                    if (card[k].getAttribute('data-item') == dataFilter || dataFilter == 'all'){
+                        card[k].classList.remove('hide');
+                        card[k].classList.add('active');
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>

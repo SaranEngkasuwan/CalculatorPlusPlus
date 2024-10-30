@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sphere Volume Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #333333;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #output {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #333333;
+        }
+
+        .button2 {
+            background-color: #4CAF50;
+            border: none; 
+            color: white; 
+            padding: 15px 25px; 
+            text-align: center; 
+            text-decoration: none; 
+            display: inline-block; 
+            font-size: 16px; 
+            margin-top: 15px ;
+            margin-bottom: 2px;
+            transition-duration: 0.4s;
+            cursor: pointer; 
+            border-radius: 12px; 
+            width: 78%;
+        }
+        
+        .button2:hover {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sphere Volume Calculator</h1>
+        <p>คำนวณโดยใช้สูตร
+            <br> 4 × 3.142 × r^3/3 (เมื่อ r = รัศมีของทรงกลม)
+        </p>
+        <input type="number" id="radius" placeholder="โปรดใส่รัศมีของทรงกลม" required>
+        <button onclick="calculateVolume()">คำนวณปริมาตร</button>
+        <div id="output"></div>
+        <div>
+            <a href="index.html" class="button2">Home</a>
+        </div>
+    </div>
+    <script>
+        function calculateVolume() {
+            const radius = document.getElementById("radius").value;
+            if (radius > 0) {
+                const volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
+                document.getElementById("output").innerText = `ปริมาตร = ${volume.toFixed(2)} ลูกบาศก์หน่วย`;
+            } else {
+                document.getElementById("output").innerText = "โปรดใส่รัศมีของทรงกลม";
+            }
+        }
+    </script>
+</body>
+</html>
